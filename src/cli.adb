@@ -35,22 +35,22 @@ package body cli is
          Help                           => "Output extra verbose information");
 
       GNAT.Command_Line.Define_Switch
-        (Config, NumSegments'access, Switch => "-s", Long_Switch => "--segments",
+        (Config, NumSegments'access, Switch => "-s=", Long_Switch => "--segments=",
+         Initial => 2 , Default => 2 ,
          Help                           => "Number of Segments");
 
       GNAT.Command_Line.Define_Switch
-        (Config, MaxWordLength'access, Switch => "-m", Long_Switch => "--max-word-length",
+        (Config, MaxWordLength'access, Switch => "-m=", Long_Switch => "--max-word-length=",
+         Initial => 8 , Default => 6 ,
          Help                           => "Maximum length of words");
-
 
       GNAT.Command_Line.Define_Switch
         (Config, WordListFile'access, Switch => "-f=",
          Long_Switch => "--word-list-file-name=", Help => "Word list file name");
 
       GNAT.Command_Line.Define_Switch
-        (Config, Separator'access, Switch => "-s=",
+        (Config, Separator'access, Switch => "-p=",
          Long_Switch => "--separator=", Help => "Separator");
-
 
       GNAT.Command_Line.Getopt (Config, SwitchHandler'access);
       if WordListFile.all'Length < 1

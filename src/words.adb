@@ -6,12 +6,14 @@ with GNAT.Case_Util ;
 
 package body words is
       
-   function Initialize( wordlist : String ) return CandidateWords_Type is
+   function Initialize( wordlist : String ;
+                        maxwordlength : integer := MAXLENGTH) return CandidateWords_Type is
       cw : CandidateWords_Type ;
       wfile : ada.text_Io.File_Type ;
       line : string(1..64) ;
       linelen : natural ;
       wordcount : integer := 0;
+      ignoredwordcount : integer := 0;
       newword : Word_Type ;
    begin
       cw.words.Reserve_Capacity(10_000);
@@ -19,14 +21,26 @@ package body words is
       while Not End_Of_File(wfile)
       loop
          get_line(wfile,line,linelen);
-         wordcount := wordcount + 1 ;
-         Ada.Strings.Fixed.Move(Source => line(1..linelen) , Target => newword);
-         pragma Debug(Put_Line(newword));
-         cw.words.Append(newword) ;
+         declare
+            baseword : string := Ada.Strings.Fixed.Trim(line(1..linelen),
+                                                        Ada.Strings.Right);
+         begin
+            if baseword'Length <= MaxWordLength
+            then
+               wordcount := wordcount + 1 ;
+               Ada.Strings.Fixed.Move(Source => baseword , Target => newword);
+               cw.words.Append(newword) ;
+               pragma Debug(Put_Line("Added " & newword));
+            else
+               ignoredwordcount := ignoredwordcount + 1 ;
+               pragma Debug(Put_Line("Too long " & baseword )) ;
+            end if ;
+         end ;
       end loop ;
       Close(wfile) ;
-      Put(wordcount); Put(" lines "); Put_Line(" read");
-      Put("Storage vector length "); Put(Integer(cw.words.Length)) ; New_Line ;
+      Put(wordcount); Put(" lines "); Put_Line(" read. "); Put(ignoredwordcount);Put( " ignored. ");
+      Put("Storage vector length "); Put(Integer(cw.words.Length)) ; 
+      New_Line ;
       return cw ;
    end Initialize ;
 
