@@ -35,14 +35,32 @@ package body cli is
          Help                           => "Output extra verbose information");
 
       GNAT.Command_Line.Define_Switch
+        (Config, NumSegments'access, Switch => "-s", Long_Switch => "--segments",
+         Help                           => "Number of Segments");
+
+      GNAT.Command_Line.Define_Switch
+        (Config, MaxWordLength'access, Switch => "-m", Long_Switch => "--max-word-length",
+         Help                           => "Maximum length of words");
+
+
+      GNAT.Command_Line.Define_Switch
         (Config, WordListFile'access, Switch => "-f=",
          Long_Switch => "--word-list-file-name=", Help => "Word list file name");
+
+      GNAT.Command_Line.Define_Switch
+        (Config, Separator'access, Switch => "-s=",
+         Long_Switch => "--separator=", Help => "Separator");
 
 
       GNAT.Command_Line.Getopt (Config, SwitchHandler'access);
       if WordListFile.all'Length < 1
       then
          WordListFile := DefaultWordListFile'Access ;
+      end if ;
+
+      if Separator.all'Length < 1
+      then
+         Separator := DefaultSeparator'access ;
       end if ;
 
       if Verbose
@@ -63,8 +81,20 @@ package body cli is
       Put (Verbose);
       New_Line;
 
+      Put("Maximum Word legnth ");
+      Put(MaxWordLength);
+      New_line ;
+
+      Put("Number of segments ");
+      put(NumSegments);
+      New_Line ;
+
       Put("Word list Filename ");
       Put(WordListFile.all);
+      New_Line ;
+
+      Put("Separator ");
+      Put(Separator.all);
       New_Line ;
 
    end ShowCommandLineArguments;

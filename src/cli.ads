@@ -8,8 +8,13 @@ package cli is
 
    HelpOption : aliased boolean ;
 
+   NumSegments : aliased Integer := 2 ;
+   MaxWordLength : aliased Integer := 6 ;
+   Separator : aliased GNAT.Strings.String_Access ;
+
    WordListFile : aliased GNAT.Strings.String_Access ;
    DefaultWordListFile : aliased String := "wordlist.txt" ;
+   DefaultSeparator : aliased String := "-" ;
 
    procedure ProcessCommandLine ;
    function GetNextArgument return String ;
