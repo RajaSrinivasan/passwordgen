@@ -5,6 +5,8 @@ with GNAT.Command_Line ;
 with cli ;
 with words ;
 with numbers ;
+with passwords ;
+with hex ;
 
 procedure Pwdgen is
    cw : words.CandidateWords_Type ;
@@ -27,4 +29,13 @@ begin
       end if;
    end loop ;
    New_Line ;
+   declare
+      pwd : aliased string := cli.GetNextArgument ;
+      key : aliased passwords.KeyType := passwords.DeriveKey(pwd,iterations=>cli.Iterations);
+   begin
+      Put("Derived Key for "); Put(pwd); Put_Line(" is ");
+      Put(hex.Image(Key'Address,key'length));
+      New_Line ;
+   end ;
+
 end Pwdgen;

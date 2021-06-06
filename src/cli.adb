@@ -52,6 +52,12 @@ package body cli is
         (Config, Separator'access, Switch => "-p=",
          Long_Switch => "--separator=", Help => "Separator");
 
+      GNAT.Command_Line.Define_Switch
+        (Config, Iterations'access, Switch => "-i=",
+         Long_Switch => "--iterations=",
+         Initial => 2 , Default => 2 ,
+         Help => "Separator");
+
       GNAT.Command_Line.Getopt (Config, SwitchHandler'access);
       if WordListFile.all'Length < 1
       then
