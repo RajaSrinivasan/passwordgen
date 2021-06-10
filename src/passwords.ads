@@ -2,7 +2,7 @@ with openssl.evp.digest ;
 with System.Unsigned_Types ;
 
 package passwords is   
-   subtype KeyType is System.Unsigned_Types.Packed_Bytes1 ;
+   subtype KeyType is openssl.evp.digest.DigestValue ;
    
    function DeriveKey( pwd : aliased string ;
                        salt : aliased string := "A big bug bit the little beetle but the little beetle bit the big bug back";
