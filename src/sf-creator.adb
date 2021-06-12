@@ -1,6 +1,6 @@
 with Interfaces.C ; use Interfaces.C ;
 with Ada.Text_Io; use Ada.Text_Io;
-
+with Ada.Integer_Text_IO ; use Ada.Integer_Text_IO ;
 with hex ;
 with openssl.evp.cipher ;
 
@@ -100,11 +100,26 @@ package body sf.creator is
    
    procedure Write ( File : SecureFile_Type;
                      Item : Ada.Streams.Stream_Element_Array ) is
+      use Ada.Streams ;
       status : int ;
+      outbuf : Ada.Streams.Stream_Element_Array(1..2*item'length) ;
+      outbuflen : aliased int ;
    begin
-      Ada.Streams.Stream_IO.Write(file.file,Item);
+      status := openssl.evp.cipher.EncryptUpdate ( file.ctx, 
+                                                   outbuf'address, 
+                                                   outbuflen'access, 
+                                                   item'address,
+                                                   int (item'length));
+      if status /= 1 then
+         --ReportError (status);
+         Put("EncryptUpdate error "); Put(Integer(status)); New_Line ;
+         raise Program_Error with "EncryptBlock";
+      end if;
+      
+      Ada.Streams.Stream_IO.Write(file.file,outbuf(1..Stream_Element_Count(outbuflen)));
       status := openssl.evp.digest.Update(file.digctx, Item'Address,
-                                         Interfaces.C.size_t(Item'length)) ;
+                                          Interfaces.C.size_t(Item'length)) ;
+
       if status /= 1
       then
           raise Program_Error with "DigestUpdate" ;
@@ -112,8 +127,12 @@ package body sf.creator is
    end Write ;
    
    procedure Close( file : in out SecureFile_Type  ) is
+      use Ada.Streams ;
       status : int ;
       diglen : aliased unsigned ;
+      outbuf : Ada.Streams.Stream_ELement_Array(1..1024) ;
+      outbuflen : Ada.Streams.Stream_Element_Count ;
+      outbuflenint : aliased int ;
    begin
       status := openssl.evp.digest.Finalize(file.digctx,
                                             file.hdr.sig'Address,
@@ -125,6 +144,15 @@ package body sf.creator is
          
       openssl.evp.digest.Free(file.digctx) ;
       
+      status := EncryptFinal_ex (file.ctx, outbuf'address, outbuflenint'access);
+         --  Put ("(Final) Wrote ");
+         --  Put (Integer (outbuflen));
+         --  Put_Line (" bytes");
+      if status /= 1 then
+            raise Program_Error with "EncryptFinal" ;
+      end if;
+      Ada.Streams.Stream_IO.Write
+           (file.file, outbuf (1 .. Stream_Element_Count (outbuflenint)));
       Ada.Streams.Stream_IO.Set_Index(file.file,1);
       headerType'Write( Ada.Streams.Stream_IO.Stream(file.file) , file.hdr ) ;
       Ada.Streams.Stream_IO.Close(file.file) ;
