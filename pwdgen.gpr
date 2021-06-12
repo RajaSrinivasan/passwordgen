@@ -4,7 +4,7 @@ project Pwdgen is
 
    for Source_Dirs use ("src");
    for Object_Dir use "obj";
-   for Main use ("sftest.adb", "pwdgen.adb");
+   for Main use ("sfrtest.adb", "sftest.adb", "pwdgen.adb");
 
    package Linker is
       for Switches ("ada") use ("-lcrypto", "-lssl", "-Lc:\msys64\usr\local\lib");

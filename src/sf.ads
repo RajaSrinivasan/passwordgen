@@ -21,7 +21,6 @@ private
    type SecureFile_Type is 
    record
       file : Ada.Streams.Stream_IO.File_Type ;
-      iv : access openssl.evp.cipher.InitVector_Type ;
       ctx : openssl.evp.cipher.Context ; 
       digctx : openssl.evp.digest.Context ;
       hdr : headerType ;   

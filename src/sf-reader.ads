@@ -6,14 +6,18 @@ package sf.reader is
    
    procedure Open( file : in out SecureFile_Type ;
                    name : string ;
-                   password : string ;
+                   password : aliased string ;
                    algorithm : string := "aes-128-cbc" 
                   ) ;
-   function Size( file : SecureFile_Type ) return Stream_Element_Count ;
+
    procedure Read
      (File : SecureFile_Type;
       Item : out Ada.Streams.Stream_Element_Array;
       Last : out Ada.Streams.Stream_Element_Offset);
+   procedure Copy( from : in out SecureFile_Type ;
+                   to : String ) ;
+   procedure Copy( from : in out SecureFile_Type ;
+                   to : Ada.Streams.Stream_Io.File_Type );
    
    procedure Close( file : in out SecureFile_Type  ) ;
 
