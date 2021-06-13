@@ -1,4 +1,4 @@
-with "../Ada/sslada/sslada.gpr";
+with "../sslada/sslada.gpr";
 
 project Pwdgen is
 
