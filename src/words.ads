@@ -4,7 +4,7 @@ package words is
    
    debug : boolean := false ;
    
-   MAXLENGTH : constant Integer := 8 ;
+   MAXLENGTH : constant Integer := 16 ;
    subtype Word_Type is string(1..MAXLENGTH) ;
    subtype MaxWordsType is integer range 1..500_000 ; 
    package Words_Pkg is new Ada.Containers.Vectors ( MaxWordsType, Word_Type ) ;
