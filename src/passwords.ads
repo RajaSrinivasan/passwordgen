@@ -9,5 +9,7 @@ package passwords is
                        hash : string := "sha256" ;
                        iterations : integer := 2 )
      return KeyType ;
-                       
+   function Generate( wordlist : string ;
+                      segs : integer := 2 ;
+                      sep : string := "^" ) return string ;
 end passwords;

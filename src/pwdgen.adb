@@ -29,6 +29,9 @@ begin
       end if;
    end loop ;
    New_Line ;
+   Put_Line(passwords.Generate( cli.WordListFile.all ,
+            cli.NumSegments ,
+            cli.Separator.all ) ) ;
    declare
       pwd : aliased string := cli.GetNextArgument ;
       key : aliased passwords.KeyType := passwords.DeriveKey(pwd,iterations=>cli.Iterations);
