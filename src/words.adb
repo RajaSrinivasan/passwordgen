@@ -38,9 +38,9 @@ package body words is
          end ;
       end loop ;
       Close(wfile) ;
-      Put(wordcount); Put(" lines "); Put_Line(" read. "); Put(ignoredwordcount);Put( " ignored. ");
-      Put("Storage vector length "); Put(Integer(cw.words.Length)) ; 
-      New_Line ;
+      --Put(wordcount); Put(" lines "); Put_Line(" read. "); Put(ignoredwordcount);Put( " ignored. ");
+      --Put("Storage vector length "); Put(Integer(cw.words.Length)) ; 
+      --New_Line ;
       return cw ;
    end Initialize ;
 

@@ -21,8 +21,8 @@ package body passwords is
       dig : MessageDigest ;
       status : int ;
    begin
-      Put("Pwd  : ");Put_Line(pwd);
-      Put("Salt : ");Put_Line(salt);
+      --Put("Pwd  : ");Put_Line(pwd);
+      --Put("Salt : ");Put_Line(salt);
       if ctx = openssl.evp.digest.NullContext
       then
          raise Program_Error with "DeriveKey NewContext" ;
@@ -57,7 +57,7 @@ package body passwords is
          end if ;
          
       end loop ;
-      Put("Digested "); Put(Integer(salt'length + pwd'length)+1) ;Put(" bytes"); New_Line;
+      --Put("Digested "); Put(Integer(salt'length + pwd'length)+1) ;Put(" bytes"); New_Line;
       status := Finalize(ctx,result'Address,diglen'access);
       if status /= 1
       then
