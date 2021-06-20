@@ -141,12 +141,12 @@ package body sf.reader is
       while not Ada.Streams.Stream_IO.End_Of_File (from.file) 
       loop
          Read (from , buffer, bufbytes);
-         Put("Decrypted "); Put(Integer(bufbytes)); Put(" bytes "); New_Line;
+         --Put("Decrypted "); Put(Integer(bufbytes)); Put(" bytes "); New_Line;
          Ada.Streams.Stream_IO.Write(to , buffer (1 .. Stream_Element_Count (bufbytes)));
       end loop;
       status := DecryptFinal_ex ( from.ctx , buffer'address, bufbytesint'access);
-      Put ("(Final) Wrote ");
-      Put (Integer (bufbytes)); New_Line ;
+      --Put ("(Final) Wrote ");
+      --Put (Integer (bufbytes)); New_Line ;
 
       Ada.Streams.Stream_IO.Write(to , buffer (1 .. Stream_Element_Count (bufbytesint)));
   
@@ -169,10 +169,10 @@ package body sf.reader is
       then
          raise Program_Error ;
       end if ;
-      Put_Line("File Data signature");
-      hex.dump( file.hdr.sig'address , file.hdr.sig'Length ) ;
-      Put_Line("Computed signature");
-      hex.dump( digest'address , digest'Length ) ;
+      --Put_Line("File Data signature");
+      --hex.dump( file.hdr.sig'address , file.hdr.sig'Length ) ;
+      --Put_Line("Computed signature");
+      --hex.dump( digest'address , digest'Length ) ;
       
       if file.hdr.sig /= digest
       then 
