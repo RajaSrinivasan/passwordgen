@@ -65,24 +65,32 @@ package body passwords is
       end if ;
       return result (1..Integer(Size(dig))) ;
    end DeriveKey ;
-   
    function Generate( wordlist : string ;
+                      segs : integer := 2 ;
+                      sep : string := "^" ) return string is
+      cw : words.CandidateWords_Type ;	
+   begin
+      cw := words.Initialize(wordlist , words.MAXLENGTH );
+      return Generate( cw , segs , sep ) ;
+   end Generate ;
+   
+   function Generate( wordlist : words.CandidateWords_Type ;
                       segs : integer := 2 ;
                       sep : string := "^" 
                      ) return string is
       result : unbounded_string := Null_Unbounded_String ;
-      cw : words.CandidateWords_Type ;	
+      --cw : words.CandidateWords_Type ;	
    begin
-      cw := words.Initialize(wordlist , words.MAXLENGTH );
+      -- cw := words.Initialize(wordlist , words.MAXLENGTH );
       
       for seg in 1..segs
       loop
 
          if seg mod 2 = 0
          then
-            Append(result,words.Choose(cw, words.Capitalize)) ; 
+            Append(result,words.Choose(wordlist, words.Capitalize)) ; 
          else
-            Append(result,words.Choose(cw)) ;
+            Append(result,words.Choose(wordlist)) ;
          end if ;
          Append(result,sep);
          Append(result,numbers.Generate);

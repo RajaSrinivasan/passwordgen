@@ -17,7 +17,7 @@ package sf.reader is
    procedure Copy( from : in out SecureFile_Type ;
                    to : String ) ;
    procedure Copy( from : in out SecureFile_Type ;
-                   to : Ada.Streams.Stream_Io.File_Type );
+                   to : in out Ada.Streams.Stream_Io.File_Type );
    
    procedure Close( file : in out SecureFile_Type  ) ;
 

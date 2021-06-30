@@ -83,6 +83,7 @@ package body sf.reader is
                    to : String ) is
       f : Ada.Streams.Stream_Io.File_Type ;
    begin
+      put("Copying to "); put_line(to);
       Ada.Streams.Stream_Io.Create( f , Ada.Streams.Stream_Io.Out_File , to ) ;
       Copy( from , f ) ;
       Ada.Streams.Stream_Io.Close(f) ;
@@ -130,7 +131,7 @@ package body sf.reader is
    end Read ;
       
    procedure Copy( from : in out SecureFile_Type ;
-                   to : Ada.Streams.Stream_Io.File_Type ) is
+                   to : in out Ada.Streams.Stream_Io.File_Type ) is
       use Ada.Streams ;
       buffer : Stream_Element_Array (1..1024) ;
       bufbytes : Stream_Element_Count ;
@@ -141,15 +142,13 @@ package body sf.reader is
       while not Ada.Streams.Stream_IO.End_Of_File (from.file) 
       loop
          Read (from , buffer, bufbytes);
-         --Put("Decrypted "); Put(Integer(bufbytes)); Put(" bytes "); New_Line;
          Ada.Streams.Stream_IO.Write(to , buffer (1 .. Stream_Element_Count (bufbytes)));
       end loop;
       status := DecryptFinal_ex ( from.ctx , buffer'address, bufbytesint'access);
-      --Put ("(Final) Wrote ");
-      --Put (Integer (bufbytes)); New_Line ;
+      Put ("(Final) Wrote ");
+      Put (Integer (bufbytes)); New_Line ;
 
       Ada.Streams.Stream_IO.Write(to , buffer (1 .. Stream_Element_Count (bufbytesint)));
-  
       
       status := openssl.evp.digest.Update(from.digctx, buffer'Address,
                                           Interfaces.C.size_t(int(bufbytesint))) ;
@@ -169,15 +168,10 @@ package body sf.reader is
       then
          raise Program_Error ;
       end if ;
-      --Put_Line("File Data signature");
-      --hex.dump( file.hdr.sig'address , file.hdr.sig'Length ) ;
-      --Put_Line("Computed signature");
-      --hex.dump( digest'address , digest'Length ) ;
       
       if file.hdr.sig /= digest
       then 
-         --raise SIGNATURE_MISMATCH ;
-         New_Line;
+         raise SIGNATURE_MISMATCH ;
       end if ;
       
       openssl.evp.digest.Free(file.digctx) ;

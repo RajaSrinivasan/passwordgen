@@ -131,7 +131,7 @@ package body sf.creator is
       status : int ;
       diglen : aliased unsigned ;
       outbuf : Ada.Streams.Stream_ELement_Array(1..1024) ;
-      outbuflen : Ada.Streams.Stream_Element_Count ;
+      --outbuflen : Ada.Streams.Stream_Element_Count ;
       outbuflenint : aliased int ;
    begin
       status := openssl.evp.digest.Finalize(file.digctx,
