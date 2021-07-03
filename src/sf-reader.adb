@@ -50,10 +50,14 @@ package body sf.reader is
       begin
          if file.hdr.pwd(1..Integer(openssl.evp.digest.Size(dig) )) /= hashed 
          then
-            Put_Line("Supplied password signature");
-            hex.dump(hashed'Address,hashed'Length);
-            Put_Line("Expected signature");
-            hex.dump( file.hdr.pwd'Address , file.hdr.pwd'Length );
+            if Verbose
+            then   
+               Put_Line("Supplied password signature");
+               hex.dump(hashed'Address,hashed'Length);
+               Put_Line("Expected signature");
+               hex.dump( file.hdr.pwd'Address , file.hdr.pwd'Length );
+            end if;
+            Put_Line("Password mismatch");
             raise PASSWORD_MISMATCH ;
          end if ;
       end ;
@@ -83,7 +87,7 @@ package body sf.reader is
                    to : String ) is
       f : Ada.Streams.Stream_Io.File_Type ;
    begin
-      put("Copying to "); put_line(to);
+      --put("Copying to "); put_line(to);
       Ada.Streams.Stream_Io.Create( f , Ada.Streams.Stream_Io.Out_File , to ) ;
       Copy( from , f ) ;
       Ada.Streams.Stream_Io.Close(f) ;
@@ -104,8 +108,8 @@ package body sf.reader is
       if End_Of_File(file.file)
       then
          status := DecryptFinal_ex ( file.ctx , result'address, resultlen'access);
-         Put ("(Final) Wrote ");
-         Put (Integer (resultlen)); New_Line ;
+         --Put ("(Final) Wrote ");
+         --Put (Integer (resultlen)); New_Line ;
          Item := result ;
          last := Stream_Element_Offset(resultlen) ;
                
@@ -145,8 +149,8 @@ package body sf.reader is
          Ada.Streams.Stream_IO.Write(to , buffer (1 .. Stream_Element_Count (bufbytes)));
       end loop;
       status := DecryptFinal_ex ( from.ctx , buffer'address, bufbytesint'access);
-      Put ("(Final) Wrote ");
-      Put (Integer (bufbytes)); New_Line ;
+      --Put ("(Final) Wrote ");
+      --Put (Integer (bufbytes)); New_Line ;
 
       Ada.Streams.Stream_IO.Write(to , buffer (1 .. Stream_Element_Count (bufbytesint)));
       

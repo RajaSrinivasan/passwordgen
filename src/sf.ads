@@ -4,7 +4,7 @@ with openssl.evp.cipher ;
 with openssl.evp.digest ;
 
 package sf is
-   verbose : boolean := true ;
+   verbose : boolean := false ;
    type headerType is
       record
          pwd : openssl.evp.digest.DigestValue(1..openssl.evp.digest.EVP_MAX_MD_SIZE)
