@@ -7,7 +7,8 @@ package cli is
    Verbose : aliased boolean ;
 
    HelpOption : aliased boolean ;
-
+   dumpOption : aliased boolean ;
+   builtinOption : aliased boolean ;
    NumSegments : aliased Integer := 2 ;
    MaxWordLength : aliased Integer := 6 ;
    Iterations : aliased Integer := 3 ;

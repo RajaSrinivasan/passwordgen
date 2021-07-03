@@ -7,12 +7,25 @@ with words ;
 with numbers ;
 with passwords ;
 with hex ;
+with words_str ;
 
 procedure Pwdgen is
    cw : words.CandidateWords_Type ;
 begin
    cli.ProcessCommandLine ;
-   cw := words.Initialize(cli.WordListFile.all , cli.MaxWordLength );
+   if cli.builtinOption
+   then
+      cw := words.Initialize( words_str.words , ',' , cli.MaxWordLength );
+   else
+      cw := words.Initialize(cli.WordListFile.all , cli.MaxWordLength );
+   end if ;
+
+   if cli.dumpOption
+   then
+      words.CodeGen(cw) ;
+      return ;
+   end if ;
+
    for s in 1..cli.NumSegments
    loop
       if s mod 2 = 0
@@ -29,16 +42,24 @@ begin
       end if;
    end loop ;
    New_Line ;
-   Put_Line(passwords.Generate( cli.WordListFile.all ,
-            cli.NumSegments ,
-            cli.Separator.all ) ) ;
+   if not cli.builtinOption
+   then
+      Put_Line(passwords.Generate( cli.WordListFile.all ,
+               cli.NumSegments ,
+               cli.Separator.all ) ) ;
+   end if ;
+
    declare
       pwd : aliased string := cli.GetNextArgument ;
       key : aliased passwords.KeyType := passwords.DeriveKey(pwd,iterations=>cli.Iterations);
    begin
-      Put("Derived Key for "); Put(pwd); Put_Line(" is ");
-      Put(hex.Image(Key'Address,key'length));
-      New_Line ;
+      if pwd'length > 0
+      then
+         Put("Derived Key for "); Put(pwd); Put_Line(" is ");
+         Put(hex.Image(Key'Address,key'length));
+         New_Line ;
+      end if ;
+
    end ;
 
 end Pwdgen;

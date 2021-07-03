@@ -44,6 +44,45 @@ package body words is
       return cw ;
    end Initialize ;
 
+   function Initialize( wordlist : string ;
+                        separator : CHARACTER ;
+                        maxwordlength : integer := MAXLENGTH ) 
+                       return CandidateWords_Type is
+      result : CandidateWords_Type ;
+      wordcount : integer := 0;
+      ignoredwordcount : integer := 0;
+      newword : Word_Type := (others => ' ');
+      wordlen : integer := 0 ;
+   begin
+      result.words.Reserve_Capacity(10_000);
+      for cp in wordlist'range
+      loop
+         if wordlist(cp) = separator
+         then
+            if wordlen > 0 and wordlen <= maxwordlength
+            then
+               result.words.Append(newword) ;
+               newword := (others => ' ');
+               wordcount := wordcount + 1 ;
+               wordlen := 0 ;
+            else
+               if wordlen > 0
+               then
+                  ignoredwordcount := ignoredwordcount + 1 ;
+               end if ;
+               wordlen := 0 ;
+            end if ;
+         else
+            if wordlen < maxwordlength
+            then
+               newword(wordlen+1) := wordlist(cp) ;
+            end if ;
+            wordlen := wordlen + 1 ;
+         end if ;
+      end loop ;
+      return result ;
+   end Initialize ;
+   
    G : gnat.Random_Numbers.Generator ;
    
    function Choose( cw : CandidateWords_Type ;
@@ -77,7 +116,27 @@ package body words is
       end if ;
       return idx ;
    end Choose ;
-    
+   procedure CodeGen( cw : CandidateWords_Type ;
+                      pkgname : string := "words_str" ) is
+      specfile : File_Type ;
+      procedure add( elem : Words_Pkg.Cursor ) is
+      begin
+         Put(ASCII.HT);
+         Put('"'); 
+         Put(Ada.Strings.Fixed.Trim(Words_Pkg.Element(elem),Ada.Strings.Right)); 
+         Put(","); Put('"') ; Put(" &"); Put(ascii.lf) ;
+      end add ;
+   begin
+      Create(specfile , Out_File , pkgname & ".ads" );
+      Set_Output(specfile);
+      Put("package "); Put(pkgname) ; Put_Line( " is ");
+      Put_Line("   words : string := ");
+      Words_Pkg.Iterate( cw.words , add'access ) ;
+      Put("     "); Put('"'); Put('"'); Put_Line(" ; ") ;
+      Put("end "); Put(pkgname); Put_Line(" ;");
+      Close(specfile);
+   end CodeGen ;
+   
 begin
    GNAT.Random_Numbers.Reset(G);
 end words;

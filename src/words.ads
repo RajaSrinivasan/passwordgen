@@ -19,7 +19,13 @@ package words is
        LowerCase ) ;
    function Initialize( wordlist : string ;
                         maxwordlength : integer := MAXLENGTH ) return CandidateWords_Type ;
+   function Initialize( wordlist : string ;
+                        separator : CHARACTER ;
+                        maxwordlength : integer := MAXLENGTH ) 
+                       return CandidateWords_Type ;
    function Choose( cw : CandidateWords_Type ; option : StringOptions := None ) return string ;
    function Choose( cw : CandidateWords_Type ) return integer ;
-      
+   procedure CodeGen( cw : CandidateWords_Type ;
+                      pkgname : string := "words_str" );
+                         
 end words;
