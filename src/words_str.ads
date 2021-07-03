@@ -171,12 +171,24 @@ package words_str is
 	"python," &
 	"perl," &
 	"go," &
-	"modula," &
-	"," &
-	"," &
-	"," &
-	"," &
-	"," &
-	"," &
+     "modula," &
+     "cobol," &
+     "rust," &
+     "scala," &
+     "flutter," &
+     "oberon," &
+	"ivy," &
+	"oak," &
+	"foxglove," &
+	"azalea," &
+	"nettle," &
+     "oleander," &
+     "hogweed," &
+     "parsnip," &
+     "jimsonweed," &
+     "bonsai," &
+     "prime," &
+     "perfect," &
+     
      "" ; 
 end words_str ;
