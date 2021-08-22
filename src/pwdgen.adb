@@ -44,24 +44,6 @@ begin
       return ;
    end if ;
 
-   --  for s in 1..cli.NumSegments
-   --  loop
-   --     if s mod 2 = 0
-   --     then
-   --        Ada.Text_Io.Put( words.Choose(cw, words.Capitalize) );
-   --     else
-   --        Ada.Text_Io.Put( words.Choose(cw) );
-   --     end if ;
-   --     Put(cli.Separator.all);
-   --     Ada.Text_Io.Put( numbers.Generate ) ;
-   --     if s /= cli.NumSegments
-   --     then
-   --        Put(cli.Separator.all);
-   --     end if;
-   --  end loop ;
-   --  New_Line ;
-
-
    if cli.builtinOption
    then
       Put_Line(passwords.Generate( words_str.words ,
