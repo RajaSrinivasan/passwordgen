@@ -28,7 +28,7 @@ package body cli is
          Help =>
            NAME & " " & VERSION & " " & Compilation_ISO_Date & " " &
            Compilation_Time,
-         Usage => "guess");
+         Usage => "[switches] [password to derive key for]");
 
       GNAT.Command_Line.Define_Switch
         (Config, Verbose'access, Switch => "-v", Long_Switch => "--verbose",
