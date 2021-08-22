@@ -54,6 +54,7 @@ package body words is
       newword : Word_Type := (others => ' ');
       wordlen : integer := 0 ;
    begin
+      --put_line(wordlist);
       result.words.Reserve_Capacity(10_000);
       for cp in wordlist'range
       loop
@@ -62,7 +63,7 @@ package body words is
             if wordlen > 0 and wordlen <= maxwordlength
             then
                result.words.Append(newword) ;
-               -- Put_Line(newword);
+               --Put_Line(newword);
                newword := (others => ' ');
                wordcount := wordcount + 1 ;
                wordlen := 0 ;
@@ -81,7 +82,7 @@ package body words is
             wordlen := wordlen + 1 ;
          end if ;
       end loop ;
-       Put(Integer(result.words.Length)) ; Put_Line("Words loaded");
+      -- Put(Integer(result.words.Length)) ; Put_Line(" words loaded");
       --New_Line ;
             
       return result ;

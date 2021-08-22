@@ -9,6 +9,8 @@ package cli is
    HelpOption : aliased boolean ;
    dumpOption : aliased boolean ;
    builtinOption : aliased boolean ;
+   deriveOption : aliased boolean ;
+
    NumSegments : aliased Integer := 2 ;
    MaxWordLength : aliased Integer := 6 ;
    Iterations : aliased Integer := 3 ;

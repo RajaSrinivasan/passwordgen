@@ -56,15 +56,21 @@ package body cli is
         (Config, Iterations'access, Switch => "-i=",
          Long_Switch => "--iterations=",
          Initial => 2 , Default => 2 ,
-         Help => "Separator");
+         Help => "Iterations for key derivation");
+
       GNAT.Command_Line.Define_Switch
         (Config, dumpOption'access, Switch => "-d", Long_Switch => "--dump-spec",
          Help                           => "Dump ada spec");
 
       GNAT.Command_Line.Define_Switch
         (Config, builtinOption'access,
-                 Switch => "-b", Long_Switch => "builtin-wordlist",
+                 Switch => "-b", Long_Switch => "--builtin-wordlist",
          Help                           => "use builtin wordlist");
+
+      GNAT.Command_Line.Define_Switch
+        (Config, deriveOption'access,
+                 Switch => "-k", Long_Switch => "--derive-key",
+         Help                           => "derive key");
 
       GNAT.Command_Line.Getopt (Config, SwitchHandler'access);
       if WordListFile.all'Length < 1
