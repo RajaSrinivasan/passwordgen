@@ -1,4 +1,5 @@
 package words_str is 
+   SEPARATOR : CHARACTER := ',' ;
    words : string := 
 	"anatomy," &
 	"heart," &

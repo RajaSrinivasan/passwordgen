@@ -7,6 +7,8 @@ with Interfaces.C ; use Interfaces.c ;
 with words ;
 with numbers ;
 
+with Ada.Text_Io; use ADa.Text_IO;
+
 package body passwords is
 
    function Generate( wordlist : string ;
@@ -14,7 +16,8 @@ package body passwords is
                       sep : string := "^" ) return string is
       cw : words.CandidateWords_Type ;	
    begin
-      cw := words.Initialize(wordlist , words.MAXLENGTH );
+      --Put_Line(wordlist);
+      cw := words.Initialize(wordlist , ',' , words.MAXLENGTH );
       return Generate( cw , segs , sep ) ;
    end Generate ;
    

@@ -62,6 +62,7 @@ package body words is
             if wordlen > 0 and wordlen <= maxwordlength
             then
                result.words.Append(newword) ;
+               -- Put_Line(newword);
                newword := (others => ' ');
                wordcount := wordcount + 1 ;
                wordlen := 0 ;
@@ -80,6 +81,9 @@ package body words is
             wordlen := wordlen + 1 ;
          end if ;
       end loop ;
+       Put(Integer(result.words.Length)) ; Put_Line("Words loaded");
+      --New_Line ;
+            
       return result ;
    end Initialize ;
    
