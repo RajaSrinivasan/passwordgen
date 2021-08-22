@@ -5,6 +5,7 @@ with Ada.Streams.Stream_IO ;
 
 with hex ;
 with passwords ;
+with passwords.kdf ;
 
 package body sf.reader is
    use openssl ;
@@ -46,7 +47,7 @@ package body sf.reader is
                                     name ) ;
       headerType'Read( Ada.Streams.Stream_IO.Stream(file.file) , file.hdr ) ;
       declare
-         hashed : openssl.evp.digest.DigestValue := passwords.DeriveKey(password);
+         hashed : openssl.evp.digest.DigestValue := passwords.kdf.DeriveKey(password);
       begin
          if file.hdr.pwd(1..Integer(openssl.evp.digest.Size(dig) )) /= hashed 
          then

@@ -189,6 +189,9 @@ package words_str is
      "bonsai," &
      "prime," &
      "perfect," &
-     
+     "contronym,antonym,antagonym,enantiodrome,antilogy,antonius,antonomasia," &
+     "synonym,synoecious,synoekete,synoicous,synonychia," &
+     "arete," &
+     "saudade,skerrick,flump,fustian,minatory,vamoose," &
      "" ; 
 end words_str ;

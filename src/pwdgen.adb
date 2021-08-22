@@ -6,6 +6,8 @@ with cli ;
 with words ;
 with numbers ;
 with passwords ;
+with passwords.kdf ;
+
 with hex ;
 with words_str ;
 
@@ -51,7 +53,7 @@ begin
 
    declare
       pwd : aliased string := cli.GetNextArgument ;
-      key : aliased passwords.KeyType := passwords.DeriveKey(pwd,iterations=>cli.Iterations);
+      key : aliased passwords.kdf.KeyType := passwords.kdf.DeriveKey(pwd,iterations=>cli.Iterations);
    begin
       if pwd'length > 0
       then

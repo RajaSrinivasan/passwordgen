@@ -5,6 +5,8 @@ with hex ;
 with openssl.evp.cipher ;
 
 with passwords ;
+with passwords.kdf ;
+
 package body sf.creator is
    use openssl ;
    use openssl.evp.cipher ;
@@ -23,7 +25,7 @@ package body sf.creator is
       dig : openssl.evp.digest.MessageDigest ;
    begin
       declare
-         hashed : openssl.evp.digest.DigestValue := passwords.DeriveKey(password);
+         hashed : openssl.evp.digest.DigestValue := passwords.kdf.DeriveKey(password);
       begin
          file.hdr.pwd(1..hashed'length) := hashed ;
       end ;
