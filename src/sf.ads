@@ -1,3 +1,8 @@
+-- @summary
+-- Secure File
+-- @description
+-- This package family defines a secure file format.
+
 with Ada.Streams.Stream_IO ;
 
 with openssl.evp.cipher ;

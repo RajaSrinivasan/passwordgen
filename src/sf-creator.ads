@@ -1,3 +1,7 @@
+-- @summary
+-- Secure File Creator
+-- @description
+-- This package helps create a secure file
 package sf.creator is
    ENCRYPT_FAILURE : exception ;
    procedure Create( file : in out SecureFile_Type ;

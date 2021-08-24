@@ -194,5 +194,7 @@ package words_str is
      "synonym,synoecious,synoekete,synoicous,synonychia," &
      "arete," &
      "saudade,skerrick,flump,fustian,minatory,vamoose," &
+     "busybody,gnashnab,snoutband,stampcrab,zooterkins,zounds,fopdoodle,foozle,klutz,mafflard,shot-clog,"&
+     "rakefire," &
      "" ; 
 end words_str ;
