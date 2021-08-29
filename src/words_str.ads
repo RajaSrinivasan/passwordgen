@@ -196,5 +196,6 @@ package words_str is
      "saudade,skerrick,flump,fustian,minatory,vamoose," &
      "busybody,gnashnab,snoutband,stampcrab,zooterkins,zounds,fopdoodle,foozle,klutz,mafflard,shot-clog,"&
      "rakefire," &
+     "hubris,ossify,nimrod,kvell,tousle,liminal,abjure," &
      "" ; 
 end words_str ;
