@@ -197,5 +197,8 @@ package words_str is
      "busybody,gnashnab,snoutband,stampcrab,zooterkins,zounds,fopdoodle,foozle,klutz,mafflard,shot-clog,"&
      "rakefire," &
      "hubris,ossify,nimrod,kvell,tousle,liminal,abjure," &
+	 "convection,radiation,pressure,saline,infect,umbilical,fetus,amneotic,placenta," &
+	 "ovine,bovine,porcine," &
+	 "embryo,spasm,aspirate,pulsatile,arterial,venous," &
      "" ; 
 end words_str ;

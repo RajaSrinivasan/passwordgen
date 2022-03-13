@@ -1,0 +1,10 @@
+
+project pwdbasic is
+
+   for Source_Dirs use ("basic","src") ;
+   for Object_Dir use "obj";
+   for Main use ("pwdbasic.adb");
+
+
+end pwdbasic;
+
