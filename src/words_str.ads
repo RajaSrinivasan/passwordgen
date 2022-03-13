@@ -200,5 +200,6 @@ package words_str is
 	 "convection,radiation,pressure,saline,infect,umbilical,fetus,amneotic,placenta," &
 	 "ovine,bovine,porcine," &
 	 "embryo,spasm,aspirate,pulsatile,arterial,venous," &
+	 "newton,einstein,galileo,gauss,fourier,harvey,maxwell,faraday,boole,higgs,chandra,bose,fermat,volta," &
      "" ; 
 end words_str ;
