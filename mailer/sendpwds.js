@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
 const { exec } = require("child_process");
-
+var request  = require('request-promise');
+var myPassword = process.env.MYPASSWORD ;
 exec("pwdbasic 12 >./passwordstoday.txt", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -17,7 +18,7 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 's@srin.me',
-    pass: '8689Honeymead'
+    pass: myPassword
   }
 });
 
