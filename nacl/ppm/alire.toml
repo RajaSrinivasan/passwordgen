@@ -9,3 +9,5 @@ maintainers-logins = ["rajasrinivasan"]
 executables = ["ppm"]
 [[depends-on]]  # Added by alr
 sparknacl = "^3.0.0"  # Added by alr
+[[depends-on]]  # Added by alr
+clic = "~0.2.0"  # Added by alr
