@@ -1,0 +1,11 @@
+name = "ppm"
+description = "Shiny new project"
+version = "0.0.0"
+
+authors = ["R Srinivasan"]
+maintainers = ["R Srinivasan <rajasrinivasan@hotmail.com>"]
+maintainers-logins = ["rajasrinivasan"]
+
+executables = ["ppm"]
+[[depends-on]]  # Added by alr
+sparknacl = "^3.0.0"  # Added by alr
