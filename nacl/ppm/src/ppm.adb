@@ -6,7 +6,7 @@ with Clic.tty ;
 with clic.config ;
 with clic.config.load ;
 
-
+with cli ;
 with words ;
 with words_str ;
 with numbers ;
@@ -25,4 +25,10 @@ begin
    Put_Line(Clic.tty.Emph(passwords.Generate (wordlist => cand , 
        segs => Integer(clic.config.Get(instance,"segments",2)) , 
        sep => clic.config.Get_As_String(instance,"separator"))));
+   declare
+      pwd : String := cli.GetNoEcho ("Password");
+   begin
+      Put_Line(pwd) ;
+   end ;
+
 end ppm ;
