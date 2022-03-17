@@ -11,6 +11,7 @@ with words ;
 with words_str ;
 with numbers ;
 with passwords ;
+with kdf ;
 
 procedure ppm is
    np : Integer := 2 ;
@@ -26,9 +27,10 @@ begin
        segs => Integer(clic.config.Get(instance,"segments",2)) , 
        sep => clic.config.Get_As_String(instance,"separator"))));
    declare
-      pwd : String := cli.GetNoEcho ("Password");
+      pwd : aliased String := cli.GetNoEcho ("Password");
    begin
       Put_Line(pwd) ;
+      Put_Line(kdf.DeriveKey(pwd));
    end ;
 
 end ppm ;
