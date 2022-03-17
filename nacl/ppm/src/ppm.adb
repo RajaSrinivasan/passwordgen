@@ -6,6 +6,8 @@ with Clic.tty ;
 with clic.config ;
 with clic.config.load ;
 
+with SparkNacl.Hashing ;
+with hex ;
 with cli ;
 with words ;
 with words_str ;
@@ -28,9 +30,12 @@ begin
        sep => clic.config.Get_As_String(instance,"separator"))));
    declare
       pwd : aliased String := cli.GetNoEcho ("Password");
+      naclKey : Sparknacl.Hashing.Digest ;
    begin
       Put_Line(pwd) ;
       Put_Line(kdf.DeriveKey(pwd));
+      naclKey := kdf.DeriveKey(pwd);
+      Put_Line(Hex.Image(naclKey'Address,naclKey'Size/8));
    end ;
 
 end ppm ;

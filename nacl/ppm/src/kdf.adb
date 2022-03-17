@@ -33,5 +33,25 @@ package body kdf is
       return Gnat.SHA512.Digest(Csha512) ;
    end DeriveKey ;
 
+    function DeriveKey( pwd : aliased string ;
+                       salt : aliased string := "pangram: the five boxing wizards jump quickly" ;
+                       iterations : integer := 2 )
+        return SparkNacl.Hashing.Digest is
+       result : SparkNacl.Hashing.Digest := SparkNacl.Hashing.IV ;
+       procedure Add(str : String) is
+          block : sparknacl.Byte_Seq(1..Str'Length) ;
+              for block'Address use str'Address; 
+       begin
+          SparkNacl.Hashing.Hashblocks (result, block);
+       end Add ;
+    begin
+       for iter in 1..iterations
+       loop
+          Add(salt) ;
+          Add(pwd) ;
+       end loop ;
+       return result ;
+    end DeriveKey ;
+
 end kdf;
 
