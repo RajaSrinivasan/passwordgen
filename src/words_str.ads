@@ -201,5 +201,6 @@ package words_str is
 	 "ovine,bovine,porcine," &
 	 "embryo,spasm,aspirate,pulsatile,arterial,venous," &
 	 "newton,einstein,galileo,gauss,fourier,harvey,maxwell,faraday,boole,higgs,chandra,bose,fermat,volta," &
+	 "pangram,kennings,antigram,ambigram,acrostics," & 
      "" ; 
 end words_str ;
