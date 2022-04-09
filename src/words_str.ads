@@ -202,5 +202,6 @@ package words_str is
 	 "embryo,spasm,aspirate,pulsatile,arterial,venous," &
 	 "newton,einstein,galileo,gauss,fourier,harvey,maxwell,faraday,boole,higgs,chandra,bose,fermat,volta," &
 	 "pangram,kennings,antigram,ambigram,acrostics," & 
+	 "oaf,gull,clod,stooge,boob,dolt,chump,patsy,dupe," &
      "" ; 
 end words_str ;
