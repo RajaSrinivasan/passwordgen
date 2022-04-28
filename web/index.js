@@ -8,7 +8,7 @@ app.get('/',(req,res) => {
 });
 app.get('/passwords',(req,res,next) => {
    //res.send('Will get you a list');
-   exec("pwdbasic 12 >./passwordstoday.txt", (error, stdout, stderr) => {
+   exec("pwdbasic 12 @$ >./passwordstoday.txt", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;

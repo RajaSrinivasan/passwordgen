@@ -1,7 +1,13 @@
 package words_str is 
+
    SEPARATOR : CHARACTER := ',' ;
-   words : string := 
-	"anatomy," &
+
+   science : string := 
+   "physics,chemistry,math,biology,astronomy," &
+   "physiology,neurology," &
+   "algebra,calculus,vectors," &
+   "knuth,dijkstra,ullman,ritchie,kernighan,turing," &
+   	"anatomy," &
 	"heart," &
 	"brain," &
 	"kidney," &
@@ -63,7 +69,6 @@ package words_str is
 	"enzyme," &
 	"thyroid," &
 	"receptor," &
-	"umami," &
 	"larynx," &
 	"pharynx," &
 	"pylorus," &
@@ -123,37 +128,6 @@ package words_str is
 	"rna," &
 	"mrna," &
 	"atp," &
-	"krishnan," &
-	"raman," &
-	"gopalan," &
-	"sita," &
-	"durga," &
-	"bagyam," &
-	"lakshmi," &
-	"shyama," &
-	"sivan," &
-	"andolika," &
-	"bhairavi," &
-	"todi," &
-	"natai," &
-	"gowla," &
-	"kanada," &
-	"arabi," &
-	"varali," &
-	"sri," &
-	"hindolam," &
-	"kurinji," &
-	"revati," &
-	"adi," &
-	"rupakam," &
-	"chapu," &
-	"misram," &
-	"tisram," &
-	"ekam," &
-	"kandam," &
-	"kalyani," &
-	"dickens," &
-	"dumas," &
 	"dawkins," &
 	"sacks," &
 	"knuth," &
@@ -182,13 +156,23 @@ package words_str is
 	"oak," &
 	"foxglove," &
 	"azalea," &
-	"nettle," &
-     "oleander," &
-     "hogweed," &
-     "parsnip," &
-     "jimsonweed," &
-     "bonsai," &
-     "prime," &
+	 "convection,radiation,pressure,saline,infect,umbilical,fetus,amneotic,placenta," &
+	 "ovine,bovine,porcine," &
+	 "embryo,spasm,aspirate,pulsatile,arterial,venous," &
+	 "newton,einstein,galileo,gauss,fourier,harvey,maxwell,faraday,boole,higgs,chandra,bose,fermat,volta," &
+   "" ;
+
+   mythology : string :=
+   "rama,krishna,sita,lakshmi,hanuman," &
+   "zeus,hercules,atlas," &
+   "" ;
+
+   literature : string :=
+   "dickens,dumas,stevens,steinbeck,joyce," &
+   "tagore," &
+   "" ;
+
+   words : string := 
      "perfect," &
      "contronym,antonym,antagonym,enantiodrome,antilogy,antonius,antonomasia," &
      "synonym,synoecious,synoekete,synoicous,synonychia," &
@@ -197,11 +181,14 @@ package words_str is
      "busybody,gnashnab,snoutband,stampcrab,zooterkins,zounds,fopdoodle,foozle,klutz,mafflard,shot-clog,"&
      "rakefire," &
      "hubris,ossify,nimrod,kvell,tousle,liminal,abjure," &
-	 "convection,radiation,pressure,saline,infect,umbilical,fetus,amneotic,placenta," &
-	 "ovine,bovine,porcine," &
-	 "embryo,spasm,aspirate,pulsatile,arterial,venous," &
-	 "newton,einstein,galileo,gauss,fourier,harvey,maxwell,faraday,boole,higgs,chandra,bose,fermat,volta," &
 	 "pangram,kennings,antigram,ambigram,acrostics," & 
 	 "oaf,gull,clod,stooge,boob,dolt,chump,patsy,dupe," &
+	 -- nym words
+	 "acronym,allonym,ananym,andronym,antonym,aptonym,autonym,backronym,basionym,caconym," &
+	 "capitonym,charactonym,contranym,cryptonym,demonym,endonym,eponym,ethnonym,exonym," &
+	 "gynonym,heteronym,homonym,hydronym,hyponym,inaptonym,linguonym,matronym,meronym,metonym," &
+	 "mononym,numeronym,odonym,oronym,paranym,pronym,patronym,plesionym,pseudonym,retronym," &
+	 "synonym,tautonym,theonym,toponym,trionym," &
      "" ; 
+
 end words_str ;
